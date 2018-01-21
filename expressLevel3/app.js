@@ -22,7 +22,9 @@ app.get('/cities', function(req, res) {
 });
 
 app.get('/cities/:name', function(req, res) {
-    var description = cities[req.params.name];
+    var name = req.params.name;
+    var city = name[0].toUpperCase() + name.slice(1).toLowerCase();
+    var description = cities[city];
     if(!description) {
        res.status(404).json("No Data found for " + req.params.name); 
     } else {
