@@ -10,8 +10,18 @@ var cities = {
     'Seattle': 'Washington', 
     'Providence': 'Rhode Island'
     };
+    
+app.param('name', function(req, res, next) {
+    var name = req.params.name;
+    var city = name[0].toUpperCase() + name.slice(1).toLowerCase();
+    
+    req.cityName = city;
+    
+    next();
+});
+    
 app.get('/cities', function(req, res) {
-    var cities = ['New York', 'Boston', 'San Francisco', 'Seattle', 'Providence'];
+    res.json(Object.keys(cities));
     if(req.query.limit > 0) {
      res.json(cities.slice(0, req.query.limit));   
     } else if(req.query.limit > cities.length) {
@@ -22,14 +32,18 @@ app.get('/cities', function(req, res) {
 });
 
 app.get('/cities/:name', function(req, res) {
-    var name = req.params.name;
-    var city = name[0].toUpperCase() + name.slice(1).toLowerCase();
-    var description = cities[city];
-    if(!description) {
+    var cityName = parseCityName(req.params.name);
+    var cityInfo = cities[cityName];
+    if(!cityInfo) {
        res.status(404).json("No Data found for " + req.params.name); 
     } else {
-    res.json(description);
+    res.json(cityInfo);
     }
 });
 
+
+function parseCityName(name) {
+  var parsedName = name[0].toUpperCase() + name.slice(1).toLowerCase();
+  return parsedName;
+}
 app.listen(process.env.PORT);
