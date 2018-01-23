@@ -3,14 +3,23 @@ var app = express();
 var bodyParser = require('body-parser');
 var parseUrlencoded = bodyParser.urlencoded({extended: false});
 
-app.post('/cities', parseUrlencoded, function (request, response) {
-   if(request.body.description.length > 4) {
-    var city = createCity(request.body.name, request.body.description);
-    response.status(201).json(city);
+app.post('/cities', parseUrlencoded, function (req, res) {
+   if(req.body.description.length > 2) {
+    var city = createCity(req.body.name, req.body.description);
+    res.status(201).json(city);
      } else {
-        response.status(400).json("Invalid City");
+        res.status(400).json("Invalid City");
      }
 });
+
+ app.delete('/cities/:name', function (req, res) {
+   if(cities[req.cityName]) {
+     delete cities[req.cityName];
+     res.sendStatus(200);
+     } else {
+      res.sendStatus(404);
+    }
+  }); 
 
 app.use(express.static('public'));
 
@@ -22,19 +31,19 @@ var cities = {
     'Providence': 'Rhode Island'
     };
     
-app.param('name', function(request, response, next) {
-  request.cityName = parseCityName(request.params.name);
-  next();
-});
+// app.param('name', function(req, res, next) {
+//   req.cityName = parseCityName(req.params.name);
+//   next();
+// });
     
 app.get('/cities', function(req, res) {
-    res.json(Object.keys(cities));
+    var city = Object.keys(cities);
     if(req.query.limit > 0) {
-     res.json(cities.slice(0, req.query.limit));   
-    } else if(req.query.limit > cities.length) {
+     res.json(city.slice(0, req.query.limit));   
+    } else if(req.query.limit > city.length) {
         res.status(400).json("query limit exceeds number of cities");
     } else {
-    res.json(cities);
+    res.json(city);
     }
 });
 

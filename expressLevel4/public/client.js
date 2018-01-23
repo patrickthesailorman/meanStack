@@ -10,3 +10,16 @@ $(function() {
     $('.city-list').append(list);
   }
 });
+
+// $('form').on('submit', function(event) {
+//   event.preventDefault();
+//   var form = $(this);
+//   var cityData = form.serialize();
+  
+//   $.ajax({
+//     type: 'POST', 
+//     url: '/cities', 
+//     data: cityData}).done(function(cityName) {
+      
+//     });
+// });
