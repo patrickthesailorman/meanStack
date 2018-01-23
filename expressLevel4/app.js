@@ -4,8 +4,8 @@ var bodyParser = require('body-parser');
 var parseUrlencoded = bodyParser.urlencoded({extended: false});
 
 app.post('/cities', parseUrlencoded, function (req, res) {
-   if(req.body.description.length > 2) {
-    var city = createCity(req.body.name, req.body.description);
+   if(req.body.state.length > 2) {
+    var city = createCity(req.body.name, req.body.state);
     res.status(201).json(city);
      } else {
         res.status(400).json("Invalid City");
@@ -31,10 +31,10 @@ var cities = {
     'Providence': 'Rhode Island'
     };
     
-// app.param('name', function(req, res, next) {
-//   req.cityName = parseCityName(req.params.name);
-//   next();
-// });
+app.param('name', function(req, res, next) {
+  req.cityName = parseCityName(req.params.name);
+  next();
+});
     
 app.get('/cities', function(req, res) {
     var city = Object.keys(cities);
@@ -49,6 +49,7 @@ app.get('/cities', function(req, res) {
 
 app.get('/cities/:name', function(req, res) {
     var cityName = parseCityName(req.params.name);
+    console.log(cityName);
     var cityInfo = cities[cityName];
     if(!cityInfo) {
        res.status(404).json("No Data found for " + req.params.name); 
@@ -59,12 +60,17 @@ app.get('/cities/:name', function(req, res) {
 
 
 function parseCityName(name) {
-  var parsedName = name[0].toUpperCase() + name.slice(1).toLowerCase();
+     var splitName = name.toLowerCase().split(' ');
+   for (var i = 0; i < splitName.length; i++) {
+       splitName[i] = splitName[i].charAt(0).toUpperCase() + splitName[i].substring(1);     
+   }
+   var parsedName = splitName.join(' '); 
+//   parsedName = name[0].toUpperCase() + name.slice(1).toLowerCase();
   return parsedName;
 }
 
-var createCity = function(name, description){
-  cities[name] = description;
+var createCity = function(name, state){
+  cities[name] = state;
   return name; 
 };
 
