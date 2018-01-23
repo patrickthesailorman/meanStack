@@ -11,13 +11,9 @@ var cities = {
     'Providence': 'Rhode Island'
     };
     
-app.param('name', function(req, res, next) {
-    var name = req.params.name;
-    var city = name[0].toUpperCase() + name.slice(1).toLowerCase();
-    
-    req.cityName = city;
-    
-    next();
+app.param('name', function(request, response, next) {
+  request.cityName = parseCityName(request.params.name);
+  next();
 });
     
 app.get('/cities', function(req, res) {
