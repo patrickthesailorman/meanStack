@@ -3,8 +3,13 @@ var app = express();
 var bodyParser = require('body-parser');
 var parseUrlencoded = bodyParser.urlencoded({extended: false});
 
+app.param('name', function(req, res, next) {
+  req.cityName = parseCityName(req.params.name);
+  next();
+});
+
 app.post('/cities', parseUrlencoded, function (req, res) {
-   if(req.body.state.length > 2) {
+   if(req.body.state.length > 2 && req.body.name.length > 4) {
     var city = createCity(req.body.name, req.body.state);
     res.status(201).json(city);
      } else {
@@ -30,11 +35,6 @@ var cities = {
     'Seattle': 'Washington', 
     'Providence': 'Rhode Island'
     };
-    
-app.param('name', function(req, res, next) {
-  req.cityName = parseCityName(req.params.name);
-  next();
-});
     
 app.get('/cities', function(req, res) {
     var city = Object.keys(cities);
