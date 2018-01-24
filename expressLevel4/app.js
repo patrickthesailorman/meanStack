@@ -13,7 +13,6 @@ app.post('/cities', parseUrlencoded, function (req, res) {
     var city = createCity(req.body.name, req.body.state);
     res.status(201).json(city);
      } else {
-         alert("All fields must be filled!");
         res.status(400).json("Invalid City");
      }
 });
