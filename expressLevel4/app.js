@@ -13,6 +13,7 @@ app.post('/cities', parseUrlencoded, function (req, res) {
     var city = createCity(req.body.name, req.body.state);
     res.status(201).json(city);
      } else {
+         alert("All fields must be filled!");
         res.status(400).json("Invalid City");
      }
 });
@@ -65,7 +66,7 @@ function parseCityName(name) {
        splitName[i] = splitName[i].charAt(0).toUpperCase() + splitName[i].substring(1);     
    }
    var parsedName = splitName.join(' '); 
-//   parsedName = name[0].toUpperCase() + name.slice(1).toLowerCase();
+
   return parsedName;
 }
 

@@ -27,7 +27,8 @@ $('form').on('submit', function(event) {
       appendToList([cityName]);
       form.trigger('reset');
     });
-    
+  });
+
   $('.city-list').on('click', 'a[data-city]', function(event) {
     if (!confirm('Are you sure?')) {
       return false;
@@ -40,6 +41,5 @@ $('form').on('submit', function(event) {
     }).done(function() {
       target.parents('li').remove();
     });
-  });
   });
 });
