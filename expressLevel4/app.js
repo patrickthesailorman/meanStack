@@ -9,7 +9,7 @@ app.param('name', function(req, res, next) {
 });
 
 app.post('/cities', parseUrlencoded, function (req, res) {
-   if(req.body.state.length > 2 && req.body.name.length > 4) {
+   if(req.body.state.length >= 2 && req.body.name.length > 4) {
     var city = createCity(req.body.name, req.body.state);
     res.status(201).json(city);
      } else {
