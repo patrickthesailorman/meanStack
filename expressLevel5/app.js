@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
-var router = require('routes/cities');
+var router = require('./routes/cities');
 
-app.use('/cities', router);
+app.use(express.static('public'));
+
+app.use('/', router);
 app.listen(process.env.PORT);

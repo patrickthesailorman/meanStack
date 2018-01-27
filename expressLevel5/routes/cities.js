@@ -1,7 +1,6 @@
 var express = require('express');
-var router = express.Router();
 var bodyParser = require('body-parser');
-var parseUrlencoded = bodyParser.urlencoded({ extend: false });
+var parseUrlencoded = bodyParser.urlencoded({ extended: false });
 
 var cities = {
     'New York': 'New York',
@@ -14,8 +13,8 @@ var cities = {
   
 
 var router = express.Router();
-router.route('/')
 
+router.route('/')
     .get(function(req, res) {
     var city = Object.keys(cities);
     if(req.query.limit > 0) {
