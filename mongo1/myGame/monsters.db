@@ -1,17 +1,18 @@
+db.monsters.insert(
 
 {
-    "_id": ObjectId("1234567"),
     "name": "monster1",
     "health": 20,
-    "last fought": 11-18-2017,
+    "last fought": new Date(2017, 11, 18),
     "attacks": ["fire", "bite", "claw"],
     "stats": {"attack": 4, "defense": 2}
 },
 {
-    "_id": ObjectId("12345678"),
     "name": "monster2",
     "health": 25,
-    "last fought": 10-20-2017,
+    "last fought": new Date(2017, 10, 20),
     "attacks": ["bite", "kick", "punch"],
     "stats": {"attack": 4, "defense": 2}
-},   
+}  
+
+)
