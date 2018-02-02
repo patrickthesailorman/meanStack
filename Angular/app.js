@@ -10,10 +10,10 @@ app.controller('StoreController', function() {
 app.controller('RentController', function() {
     this.rent = function(cars){
         if(cars.available > cars.rented){
-            this.canRent = true;
+            cars.canRent = true;
             cars.rented ++;
         } else if (cars.rented === cars.available) {
-            this.canRent = false;
+            cars.canRent = false;
         }
     }
     });
