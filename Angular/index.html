@@ -9,14 +9,22 @@
 </head>
 <body ng-controller="StoreController as store">
     <h1>Slick Willies Car rental</h1>
-    <div ng-repeat="product in store.products | orderBy: 'price'" ng-hide="store.products.soldOut">
+    <!--  Products Container  -->
+    <div class="list-group">
+        <!--  Product Container  -->
+        <div class="list-group-item" ng-repeat="product in store.products | orderBy: 'price'" ng-hide="store.products.soldOut">
         <h3> 
         {{product.name}}
         <em class="pull-right">{{product.price | currency}}</em>
         </h3>
-        <img ng-src="{{product.images.url}}">
-        <p>{{product.description}}</p>
-        <button ng-show="product.canRent">Add to cart</button>
+        <!-- Image Gallery  -->
+            <div ng-show="product.images">
+                <p>{{product.description}}</p>
+                <img ng-src="{{product.images.url}}">
+                
+                <button ng-show="product.canRent">Add to cart</button>
+            </div>
+        </div>
     </div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
