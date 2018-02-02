@@ -10,7 +10,7 @@
 <body ng-controller="StoreController as store">
     <h1>Rent a Ride</h1>
     <!--  Products Container  -->
-    <div class="list-group">
+    <div class="list-group" ng-controller="Rent controller as rent">
         <!--  Product Container  -->
         <div class="list-group-item" ng-repeat="product in store.products | orderBy: 'price'" ng-hide="store.products.soldOut">
         <h3> 
