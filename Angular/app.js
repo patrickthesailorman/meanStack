@@ -10,7 +10,6 @@ app.controller('StoreController', function() {
 app.controller('RentController', function() {
     this.rent = function(cars){
         if(cars.available > cars.rented){
-            cars.canRent = true;
             cars.rented ++;
         } else if (cars.rented === cars.available) {
             cars.canRent = false;
@@ -24,7 +23,7 @@ var cars = [
     price: 24.95,
     description: "Economy car",
     canRent: true,
-    available: 30,
+    available: 15,
     rented: 10,
     soldOut: false,
     images: {
@@ -48,7 +47,7 @@ var cars = [
     price: 64.95,
     description: "Luxury car",
     canRent: true,
-    available: 10,
+    available: 6,
     rented: 4,
     soldOut: false,
     images: {
@@ -60,7 +59,7 @@ var cars = [
     price: 44.95,
     description: "Van",
     canRent: true,
-    available: 10,
+    available: 5,
     rented: 2,
     soldOut: false,
     images: {

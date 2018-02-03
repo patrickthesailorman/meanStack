@@ -10,7 +10,7 @@
 <body ng-controller="StoreController as store">
     <h1>Rent a Ride</h1>
     <!--  Products Container  -->
-    <div class="list-group" ng-controller="Rent controller as rent">
+    <div class="list-group" >
         <!--  Product Container  -->
         <div class="list-group-item" ng-repeat="product in store.products | orderBy: 'price'" ng-hide="store.products.soldOut">
         <h3> 
@@ -20,9 +20,10 @@
         <!-- Image Gallery  -->
             <div ng-show="product.images">
                 <p>{{product.description}}</p>
+                <p>Available: {{product.available - product.rented}}</p>
                 <img ng-src="{{product.images.url}}">
                 
-                <button ng-show="product.canRent">Rent Me</button>
+                <button ng-show="product.canRent" ng-controller="RentController as rent" ng-click="rent.rent(product)">Rent Me</button>
                 <h2 ng-hide="product.canRent">Unavailable</h2>
             </div>
         </div>
