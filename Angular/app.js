@@ -9,11 +9,11 @@ app.controller('StoreController', function() {
 
 app.controller('RentController', function() {
     this.rent = function(cars){
-        if(cars.available > cars.rented){
-            cars.rented ++;
-        } else if (cars.rented === cars.available) {
+      if (cars.rented === cars.available) {
             cars.canRent = false;
-        }
+        } else if(cars.available > cars.rented){
+            cars.rented ++;
+        } 
     }
     });
 
