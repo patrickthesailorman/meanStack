@@ -12,7 +12,7 @@
     <!--  Products Container  -->
     <div class="list-group" >
         <!--  Product Container  -->
-        <div class="list-group-item" ng-repeat="product in store.products | orderBy: 'price'" ng-hide="store.products.soldOut">
+        <div class="list-group-item" ng-repeat="product in store.products | orderBy: 'price'">
         <h3> 
         {{product.name}}
         <em class="pull-right">{{product.price | currency}}</em>

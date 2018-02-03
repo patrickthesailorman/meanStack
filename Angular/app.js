@@ -8,7 +8,7 @@ app.controller('StoreController', function() {
     });
 
 app.controller('RentController', function() {
-    this.rent = function(cars){
+    this.rent = function(cars) {
       if (cars.rented === cars.available) {
             cars.canRent = false;
         } else if(cars.available > cars.rented){
@@ -35,8 +35,8 @@ var cars = [
     price: 34.95,
     description: "Full-size car",
     canRent: true,
-    available: 20,
-    rented: 10,
+    available: 12,
+    rented: 8,
     soldOut: false,
     images: {
         url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRvlLCcS3oa-Y7pMvvmAER0gGOu8ULDydlnFQ0cA_LccbY17xnCA"
